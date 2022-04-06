@@ -13,6 +13,28 @@
 <body>
     <?php
         echo "Hello, we are starting to work with Databases and PHP PDO!"; 
+
+        //Prepare connection parameters.
+        // getenv (string $varname, bool $local_only = false): string|false
+        $dbHost = getenv('DB_HOST');
+        $dbName = getenv('DB_NAME');
+        $dbUser = getenv('DB_USER');
+        $dbPassword = getenv('DB_PASSWORD');
+
+        // Connect to mySQL database using PHP PDO Object.
+        $dbConnection = new PDO("mysql:host=$dbHost;dbName=$dbName;charset=utf8", $dbUser, $dbPassword);
+
+        // TELL PDO to throw Exceptions for every error
+        $dbConnection->setAttribute(PDO:: ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        //Create the SELECT query and fetch all table rows as associative array
+        // Bsp. SELECT * FROM Customers
+        $query = $dbConnection->query("SELECT * from Books"); //https://www.php. 
+        $query->fetch(PDO::FETCH_ASSCOC);
+
+        /*echo '<pre>':
+        print_r($dbConnection);
+        echo '</pre>';*/
     ?>
     
 </body>
