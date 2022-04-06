@@ -29,13 +29,28 @@
 
         //Create the SELECT query and fetch all table rows as associative array
         // Bsp. SELECT * FROM Customers
-        $query = $dbConnection->query("SELECT * from Books"); //https://www.php. 
+        $query = $dbConnection->query("SELECT * from Books"); //https://www.php. blabla
         $query->fetch(PDO::FETCH_ASSCOC);
 
-        /*echo '<pre>':
-        print_r($dbConnection);
-        echo '</pre>';*/
-    ?>
+echo '<div class="container-fluid p-5">'
+echo '<div class ="h3">My favorite Books</div>'
+echo '<table class="table table-striped">'
+echo '<thead>'
+echo '<tr>'
+echo '<th>columnName</th>'
+echo '</tr>'
+echo '</thead>'
+echo '<tr>'
+echo '<td>value</td>'
+echo '</tr>'
+echo '</table>'
+echo '</div>'
+echo '</div>'
+
+echo '<pre>':
+print_r($dbConnection);
+echo '</pre>';*/
+
     
 </body>
 </html>
