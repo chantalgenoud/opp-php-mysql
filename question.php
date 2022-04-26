@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
 </head>
+
 <body>
-    <?php
+    <!--
+    <?php /*
         echo "Hello, we are starting to work with Databases and PHP PDO!"; 
 
         //Prepare connection parameters.
@@ -27,58 +29,52 @@
         // TELL PDO to throw Exceptions for every error
         $dbConnection->setAttribute(PDO:: ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        //Create the SELECT query and fetch all table rows as associative array
-        // Bsp. SELECT * FROM Customers
-        $query = $dbConnection->query("SELECT * from Books"); //https://www.php. blabla
-        //$query->fetch(PDO::FETCH_ASSOC);
+*/
+    ?> 
 
-echo '<div class="container-fluid p-5">';
-echo '<div class ="h3">My favorite Books</div>';
-echo '<table class="table table-striped">';
-
-//Print table header
-echo '<thead>';
-echo '<tr>';
-
-
-//Get column metadate and the name of the column
-$columnCount = $query->columnCount();
-
-    for ($i = 0; $i <$columnCount; $i++) {
-    $columnInfo = $query->getColumnMeta($i);
-    $columnName = $columnInfo['name'];
-    echo "<td>$columnName</td>";
-    }
-
-
-
-echo'</tr>';
-echo '</thead>';
- 
-    //Print table rows (for each book one row).
-    while ($row =  $query->fetch(PDO::FETCH_ASSOC)){
-    echo'<tr>';
-
-        //For each column (<td> one value.
-        foreach ($row as $columnName => $value) { //Implikationspfeil
-            
-        echo "<td>$value</td>";
-        }
-
-    echo '</tr>';
-
-    }
-
-    // End of table rows.
-
-echo '</table>';
-echo '</div>';
-echo '</div>';
-
-echo '<pre>';
-print_r($query);
-echo '</pre>';
-
-    ?>
 </body>
+-->
+
+
+// da kommt der include db
+<?php include 'db.php';?>
+
+<?php
+    $currentQuestionIndex = 0;
+
+    if (isset($_POST['lastQuestionIndex'])) {
+        //get data from last post. 
+        $lastQuestionIndex = $_POST['lastQuestionIndex'];
+
+        if (isset($_POST['nextQuestionIndex'])) {
+            // Define the index number of the next question.
+            $currentQuestionIndex = $_POST['nextQuestionIndex'];
+
+        }
+    }
+
+    //Check if $_SESSION ['questions'] exists.
+    if (isset($_SESSION['questions'])) {
+        // echo 'questions data EXISTS in session <br':
+        $questions = $SESSION['questions'];
+    }
+          
+    else {
+        // echo 'questions data does NOT exist in session-<br>;
+
+    //Get quiz data using php/db.php
+    $questions = getQuestions(); //FEHLER !!!
+
+    //... and save that data in $_SESSION
+    $_SESSION['questions'] = $questions;
+    }
+
+    echo '<pre>';
+    print_r($_SESSION['questions']);
+    echo '</pre>';
+
+
+
+    // SIMPLE CHOICE MULTIPLE CHOISE NO CLUE ABOUT That
+?>
 </html>

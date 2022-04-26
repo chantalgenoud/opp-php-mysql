@@ -2,3 +2,17 @@
     background-color: aquamarine;
     color: darkslategray;
 }
+
+.td {
+    background-color: violet;
+}
+
+.thead {
+    background-color: turquoise;
+}
+
+.table {
+    background-color: rgb(179, 64, 224);
+}
+
+/* dont work */

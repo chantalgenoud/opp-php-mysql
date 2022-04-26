@@ -29,11 +29,18 @@
 
         //Create the SELECT query and fetch all table rows as associative array
         // Bsp. SELECT * FROM Customers
-        $query = $dbConnection->query("SELECT * from Books"); //https://www.php. blabla
+        $query = $dbConnection->query("SELECT * from Questions WHERE ID =1"); //https://www.php. blabla
+        //$query->fetch(PDO::FETCH_ASSOC);
+
+
+                //Create the SELECT query and fetch all table rows as associative array
+        // Bsp. SELECT * FROM Customers
+        $query2 = $dbConnection->query("SELECT * from Answers WHERE QuestionID = 1"); //https://www.php. blabla
         //$query->fetch(PDO::FETCH_ASSOC);
 
 echo '<div class="container-fluid p-5">';
-echo '<div class ="h3">My favorite Books</div>';
+echo '<div class ="h3">Animals
+</div>';
 echo '<table class="table table-striped">';
 
 //Print table header
@@ -69,6 +76,35 @@ echo '</thead>';
 
     }
 
+
+
+//Get column metadate and the name of the column
+$columnCount = $query2->columnCount();
+
+for ($i = 0; $i <$columnCount; $i++) {
+$columnInfo = $query2->getColumnMeta($i);
+$columnName = $columnInfo['name'];
+echo "<td>$columnName</td>";
+}
+
+
+
+echo'</tr>';
+echo '</thead>';
+
+//Print table rows (for each book one row).
+while ($row =  $query2->fetch(PDO::FETCH_ASSOC)){
+echo'<tr>';
+
+    //For each column (<td> one value.
+    foreach ($row as $columnName => $value) { //Implikationspfeil
+        
+    echo "<td>$value</td>";
+    }
+
+echo '</tr>';
+
+}
     // End of table rows.
 
 echo '</table>';
@@ -77,6 +113,7 @@ echo '</div>';
 
 echo '<pre>';
 print_r($query);
+print_r($query2);
 echo '</pre>';
 
     ?>
