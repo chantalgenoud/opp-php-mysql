@@ -38,7 +38,7 @@
 
 // da kommt der include db
 <?php include 'db.php';?>
-
+<?php include 'data-collector.php'; ?>
 <?php
     $currentQuestionIndex = 0;
 
@@ -73,8 +73,55 @@
     print_r($_SESSION['questions']);
     echo '</pre>';
 
-
-
-    // SIMPLE CHOICE MULTIPLE CHOISE NO CLUE ABOUT That
 ?>
+
+<!-- SIMPLE CHOICE MULTIPLE CHOISE NO CLUE ABOUT That -->
+
+<div class = "row">
+    <div class = "col-sm-12">
+    <h3>Frage <?php echo $currentQuestionIndex; ?> </h3>
+    <p><?php echo $questions[$currentQuestionIndex]['text']; ?></p>
+        <form method = "post">
+
+            <?php
+                $answers = $questions[$currentQuestionIndex];
+                $isMultipleChoice = $questions[$currentQuestionIndex]['isMulitpleChoice'];
+
+                for ($a = 0; $a < count($answers); $a++) {
+                    echo '<div class = "form-check">';
+                    $isCorrect = $answers[$a]['isCorrect'];
+
+                    if ($isMultipleChoice == 1) {
+                        //Multiple Choice (checkbox)
+                        echo '<input class = "form-check-input" type = "checkbox" name = "a-' . $a . '"value="' . $isCorrect . '" id= "i-' . $a . '">';
+                    }
+                    else {
+                        //Single Choice (radio)
+                        echo '<input class = "form-check-input" type = "radio" name = "a-0" value ="' . $isCorrect . '" id = "i-' . $a .'">';
+                    }
+
+                $maxPoints += $isCorrect;
+                
+                echo '<label class = "form-check-label" for = "i-' . $a . '">';
+                echo $answers[$a]['answer'];
+                echo '</label>';
+                echo '</div>';
+                }       
+        ?>
+
+        <!--Hidden Fields -->
+        <input type= "hidden" name = "lastQuestionIndex" value = "<?php echo $currentQuestionIndex; ?>">
+        <input type = "hidden" name = "nextQuestionIndex" value = "?php echo $currentQuestionIndex + 1; ?>">
+        <input type = "hidden" name = "maxPoints" value = "<?php $maxPoints; ?>">
+        <!--END hidden Fields -->
+
+        <p class = "warning"></p>
+        <input type = "submit">
+
+    </form> <!--wo fängt die an?-->
+
+
+
+
+
 </html>
