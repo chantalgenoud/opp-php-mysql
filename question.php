@@ -42,11 +42,11 @@
 
 <div class = "row">
     <div class = "col-sm-12">
-    <h3>Frage <?php echo $currentQuestionIndex; ?> </h3>
+    <h3>Frage <?php echo $questions[$currentQuestionIndex]['ID']; ?> </h3> <!--Fragenummer -->
     <p><?php echo $questions[$currentQuestionIndex]['Text']; ?></p>
         
     
-    <form <?php if        ($currentQuestionIndex + 1 >= count($questions)) echo 'action= "result.php" '; ?> method = "post">
+    <form <?php if        ($currentQuestionIndex + 1 >= count($questions)) echo 'action= "result.php" '; ?> method = "post"> 
 
             <?php
                 $answers = $questions[$currentQuestionIndex]['answers'];
