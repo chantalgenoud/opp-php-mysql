@@ -1,14 +1,15 @@
 <?php
+
 if (isset($_POST['lastQuestionIndex'])) {
     // Get the Index (string) of the last question.
     $lastQuestionIndex = $_POST['lastQuestionIndex']; // ohne intval()
 
-    // and create the key for that question.
+    // and create the key for that question. //es zähtl die max points nicht
     $questionKey = 'q-' . $lastQuestionIndex;
 
     // ACHIEVED POINTS
 
-    /*Get tehe number of achieved points, chacking all keys in $_POST for the head
+    /*Get the number of achieved points, checking all keys in $_POST for the head
     'a-', like 'a-0', 'a-1' etc.*/
 
     $achievedPoints = 0;
@@ -20,29 +21,36 @@ if (isset($_POST['lastQuestionIndex'])) {
         }
     }
 
-        /* Put the achieved points into the list, using a 'q-' headed key,
-        which identifies the question in the list.*/
+    //dev only
+  //  echo "achievedPoints = $achieved Points";
 
-        //$_SESSION['achievedPointsList'][$questionKey] = $achievedPoints;
 
-                //make sure the list of all max points exixts in the $_SESSION
-                if (!isset($_SESSION['achievedPointsList'])); {
-                    $_SESSION['achievedPointsList'] = array();
-                }
+    //make sure the list of all max points exixts in the $_SESSION
+    if (!isset($_SESSION['achievedPointsList'])); {
+        $_SESSION['achievedPointsList'] = array();
+    }
+
+
+/*put the achieved points into the list, using a 'q-' headed key, with 
+identifies the question in the list. */
+$_SESSION['achievedPointsList'][$questionKey] = $achievedPoints;
 
         // MAX Points
         $maxPoints = intval($_POST['maxPoints']);
 
         //make sure the list of all max points exixts in the $_SESSION
-        if (!isset($_SESSION['maxPointsList'])); {
+        if (!isset($_SESSION['maxPointsList'])) {
             $_SESSION['maxPointsList'] = array();
         }
 
-            /*put the achieved points into the list, asing a 'q-' headed key, 
+    /*put the achieved points into the list, asing a 'q-' headed key, 
     which identifies the question in the list. */
     $_SESSION['maxPointsList'][$questionKey] = $maxPoints;
 }
 
 // DEV ONLY CODE
+echo '<pre>';
+print_r($_SESSION);
+echo '<pre>';
 
 ?>

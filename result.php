@@ -1,3 +1,7 @@
+<?php
+include 'db.php';
+include 'data-collector.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +17,9 @@
 
 <body>
 
+
+
 <?php
-include 'db.php';
-include 'data-collector.php'; 
 
 // Get the lits with the achieved and maximum points (listed er question).
 if (isset($_SESSION['achhievedPointsList'])) {
@@ -50,7 +54,7 @@ else {
         
         
         //Depending of the achieved points, set a feedback exclamation
-        if ($total / $maxTotal >=0.8) {
+        if ($total / $maxTotal >= 0.8) {
             $exclamation = "Great";
         }
         
