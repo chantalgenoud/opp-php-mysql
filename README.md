@@ -1,3 +1,6 @@
+Chantal: Die maxPoints funktioniert nicht. Sonst dev mode halt. 
+
+
 # Docker for local web development: a basic LEMP stack (Linux, Nginx, MySQL, PHP)
 
 ## Content
