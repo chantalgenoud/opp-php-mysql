@@ -28,7 +28,7 @@ if (isset($_POST['lastQuestionIndex'])) {
 
 
     //make sure the list of all achieved points? exixts in the $_SESSION
-    if (!isset($_SESSION['achievedPointsList'])); {
+    if (!isset($_SESSION['achievedPointsList'])) {
         $_SESSION['achievedPointsList'] = array();
     }
 

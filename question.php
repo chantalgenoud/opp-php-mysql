@@ -59,7 +59,7 @@
 
                     if ($type == 'MULTIPLE') {
                         //Multiple Choice (checkbox)
-                        echo '<input class = "form-check-input" type = "checkbox" name = "a-' . $a . '"value="' . $isCorrect . '" id= "i-' . $a . '">';
+                        echo '<input class = "form-check-input" type = "checkbox" name = "a-' . $a . '" value="' . $isCorrect . '" id= "i-' . $a . '">';
                     }
                     else {
                         //Single Choice (radio)
@@ -78,7 +78,7 @@
         <!--Hidden Fields -->
         <input type= "hidden" name = "lastQuestionIndex" value = "<?php echo $currentQuestionIndex; ?>">
         <input type = "hidden" name = "nextQuestionIndex" value = "<?php echo $currentQuestionIndex + 1; ?>">
-        <input type = "hidden" name = "maxPoints" value = "<?php $maxPoints; ?>">
+        <input type = "hidden" name = "maxPoints" value = "<?php echo $maxPoints; ?>">
         <!--END hidden Fields -->
 
         <p class = "warning"></p>

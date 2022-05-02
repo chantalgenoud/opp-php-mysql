@@ -22,9 +22,10 @@ include 'data-collector.php'; ?>
 <?php
 
 // Get the lits with the achieved and maximum points (listed er question).
-if (isset($_SESSION['achhievedPointsList'])) {
+if (isset($_SESSION['achievedPointsList'])) {
     $achievedPointsList = $_SESSION['achievedPointsList'];
 }
+
 else{
     //Lands here if result-php is opened in the browser before visiting any qustion before.
     $achievedPointsList = array();
@@ -42,7 +43,7 @@ else {
     $total = 0;
 
     foreach ($achievedPointsList as $key => $value) {
-        $Total += $value;
+        $total += $value;
     }
 
     //Get total maximum points.
