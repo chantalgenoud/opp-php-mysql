@@ -1,10 +1,12 @@
 <?php
 
+//es zählt maxPoint nicht
+
 if (isset($_POST['lastQuestionIndex'])) {
     // Get the Index (string) of the last question.
     $lastQuestionIndex = $_POST['lastQuestionIndex']; // ohne intval()
 
-    // and create the key for that question. //es zähtl die max points nicht
+    // and create the key for that question. //es zählt die max points nicht
     $questionKey = 'q-' . $lastQuestionIndex;
 
     // ACHIEVED POINTS
@@ -25,7 +27,7 @@ if (isset($_POST['lastQuestionIndex'])) {
   //  echo "achievedPoints = $achieved Points";
 
 
-    //make sure the list of all max points exixts in the $_SESSION
+    //make sure the list of all achieved points? exixts in the $_SESSION
     if (!isset($_SESSION['achievedPointsList'])); {
         $_SESSION['achievedPointsList'] = array();
     }
