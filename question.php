@@ -40,6 +40,7 @@
 <?php include 'db.php';?>
 <?php include 'data-collector.php'; ?>
 <?php
+   //Evaluete data in $_POST variable
     $currentQuestionIndex = 0;
 
     if (isset($_POST['lastQuestionIndex'])) {
@@ -63,15 +64,17 @@
         // echo 'questions data does NOT exist in session-<br>;
 
     //Get quiz data using php/db.php
-    $questions = getQuestions(); //FEHLER !!!
+    $questions = getQuestions();
 
     //... and save that data in $_SESSION
     $_SESSION['questions'] = $questions;
     }
 
-    echo '<pre>';
+ //dev ONLy
+ 
+ /*   echo '<pre>';
     print_r($_SESSION['questions']);
-    echo '</pre>';
+    echo '</pre>'; */
 
 ?>
 
@@ -81,11 +84,14 @@
     <div class = "col-sm-12">
     <h3>Frage <?php echo $currentQuestionIndex; ?> </h3>
     <p><?php echo $questions[$currentQuestionIndex]['text']; ?></p>
-        <form method = "post">
+        
+    
+    <form <?php if ($currentQuestionIndex + 1 >= count($questions)) echo 'action= "result.php" '; ?> method = "post">
 
             <?php
-                $answers = $questions[$currentQuestionIndex];
+                $answers = $questions[$currentQuestionIndex]['answers'];
                 $isMultipleChoice = $questions[$currentQuestionIndex]['isMulitpleChoice'];
+                $maxPoints = 0; 
 
                 for ($a = 0; $a < count($answers); $a++) {
                     echo '<div class = "form-check">';
@@ -111,17 +117,17 @@
 
         <!--Hidden Fields -->
         <input type= "hidden" name = "lastQuestionIndex" value = "<?php echo $currentQuestionIndex; ?>">
-        <input type = "hidden" name = "nextQuestionIndex" value = "?php echo $currentQuestionIndex + 1; ?>">
+        <input type = "hidden" name = "nextQuestionIndex" value = "<?php echo $currentQuestionIndex + 1; ?>">
         <input type = "hidden" name = "maxPoints" value = "<?php $maxPoints; ?>">
         <!--END hidden Fields -->
 
         <p class = "warning"></p>
         <input type = "submit">
 
-    </form> <!--wo fängt die an?-->
+    </form> 
 
 
 
-
+    </body>
 
 </html>
