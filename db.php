@@ -1,3 +1,20 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    
 <?php
 
 function getQuestions () {
@@ -21,7 +38,7 @@ function getQuestions () {
         // Get all questions and answers - together.
         $query = $dbConnection ->query("SELECT * FROM Questions");
         $questions = $query ->fetchAll (PDO::FETCH_ASSOC);
-
+        //print_r($questions);
 
         for ($q = 0; $q < count($questions); $q++) {
             $question = $questions[$q];
@@ -32,6 +49,8 @@ function getQuestions () {
 
             $questions[$q]['answers'] = $answers;
         }
+    //print_r($questions);    
+
     return $questions;
 }
 ?>

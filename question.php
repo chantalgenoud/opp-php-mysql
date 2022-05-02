@@ -1,42 +1,3 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-</head>
-
-<body>
-    <!--
-    <?php /*
-        echo "Hello, we are starting to work with Databases and PHP PDO!"; 
-
-        //Prepare connection parameters.
-        // getenv (string $varname, bool $local_only = false): string|false
-        $dbHost = getenv('DB_HOST');
-        $dbName = getenv('DB_NAME');
-        $dbUser = getenv('DB_USER');
-        $dbPassword = getenv('DB_PASSWORD');
-
-        // Connect to mySQL database using PHP PDO Object.
-        $dbConnection = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
-
-        // TELL PDO to throw Exceptions for every error
-        $dbConnection->setAttribute(PDO:: ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-*/
-    ?> 
-
-</body>
--->
-
-
-// da kommt der include db
 <?php include 'db.php';?>
 <?php include 'data-collector.php'; ?>
 <?php
@@ -57,17 +18,16 @@
     //Check if $_SESSION ['questions'] exists.
     if (isset($_SESSION['questions'])) {
         // echo 'questions data EXISTS in session <br':
-        $questions = $SESSION['questions'];
+        $questions = $_SESSION['questions'];
     }
           
     else {
-        // echo 'questions data does NOT exist in session-<br>;
+            // echo 'questions data does NOT exist in session-<br>;
+        //Get quiz data using php/db.php
+        $questions = getQuestions();
 
-    //Get quiz data using php/db.php
-    $questions = getQuestions();
-
-    //... and save that data in $_SESSION
-    $_SESSION['questions'] = $questions;
+        //... and save that data in $_SESSION
+        $_SESSION['questions'] = $questions;
     }
 
  //dev ONLy
@@ -83,21 +43,21 @@
 <div class = "row">
     <div class = "col-sm-12">
     <h3>Frage <?php echo $currentQuestionIndex; ?> </h3>
-    <p><?php echo $questions[$currentQuestionIndex]['text']; ?></p>
+    <p><?php echo $questions[$currentQuestionIndex]['Text']; ?></p>
         
     
-    <form <?php if ($currentQuestionIndex + 1 >= count($questions)) echo 'action= "result.php" '; ?> method = "post">
+    <form <?php if        ($currentQuestionIndex + 1 >= count($questions)) echo 'action= "result.php" '; ?> method = "post">
 
             <?php
                 $answers = $questions[$currentQuestionIndex]['answers'];
-                $isMultipleChoice = $questions[$currentQuestionIndex]['isMulitpleChoice'];
+                $type = $questions[$currentQuestionIndex]['Type'];
                 $maxPoints = 0; 
 
                 for ($a = 0; $a < count($answers); $a++) {
                     echo '<div class = "form-check">';
-                    $isCorrect = $answers[$a]['isCorrect'];
+                    $isCorrect = $answers[$a]['IsCorrectAnswer'];
 
-                    if ($isMultipleChoice == 1) {
+                    if ($type == 'MULTIPLE') {
                         //Multiple Choice (checkbox)
                         echo '<input class = "form-check-input" type = "checkbox" name = "a-' . $a . '"value="' . $isCorrect . '" id= "i-' . $a . '">';
                     }
@@ -109,7 +69,7 @@
                 $maxPoints += $isCorrect;
                 
                 echo '<label class = "form-check-label" for = "i-' . $a . '">';
-                echo $answers[$a]['answer'];
+                echo $answers[$a]['Text'];
                 echo '</label>';
                 echo '</div>';
                 }       
